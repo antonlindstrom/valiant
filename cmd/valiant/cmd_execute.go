@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/codegangsta/cli"
 )
 
@@ -22,20 +19,19 @@ var cmdExecute = cli.Command{
 			Usage: "Path to directory containing tests",
 		},
 	},
-	Action: func(c *cli.Context) {
+	Action: func(c *cli.Context) error {
 		if c.String("address") == "" {
-			fmt.Println("--address is required")
-			os.Exit(1)
+			return cli.NewExitError("--address is required", 1)
 		}
 
 		err := runTests(c.String("address"), c.String("test-directory"))
 		if err == errTestFailure {
-			os.Exit(1)
+			return cli.NewExitError("test exited with a failure", 1)
 		}
 
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
+		return nil
 	},
 }

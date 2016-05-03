@@ -1,12 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
-	"os"
 
-	"github.com/codegangsta/cli"
 	"github.com/antonlindstrom/valiant/config"
+	"github.com/codegangsta/cli"
 )
 
 var cmdGenerate = cli.Command{
@@ -19,22 +17,21 @@ var cmdGenerate = cli.Command{
 			Usage: "Full path to the destination, example: tests/00_example.yml (required)",
 		},
 	},
-	Action: func(c *cli.Context) {
+	Action: func(c *cli.Context) error {
 		if c.String("test-file") == "" {
-			fmt.Println("--test-file is required")
-			os.Exit(1)
+			return cli.NewExitError("--test-file is required", 1)
 		}
 
 		b, err := config.GenerateExample()
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
 
 		err = ioutil.WriteFile(c.String("test-file"), b, 0664)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
+
+		return nil
 	},
 }

@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"os"
 
 	"github.com/codegangsta/cli"
 )
@@ -22,43 +21,39 @@ var cmdUpdate = cli.Command{
 			Usage: "Full path to the test to update, example: tests/00_example.yml (required)",
 		},
 	},
-	Action: func(c *cli.Context) {
+	Action: func(c *cli.Context) error {
 		if c.String("address") == "" {
-			fmt.Println("--address is required")
-			os.Exit(1)
+			return cli.NewExitError("--address is required", 1)
 		}
 
 		if c.String("test-file") == "" {
-			fmt.Println("--test-file is required")
-			os.Exit(1)
+			return cli.NewExitError("--test-file is required", 1)
 		}
 
 		spec, err := parseFile(c.String("test-file"))
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
 
 		resp, err := spec.SendRequest(c.String("address"))
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
 
 		spec.Response = *resp
 
 		b, err := spec.Update()
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
 
 		err = ioutil.WriteFile(c.String("test-file"), b, 0664)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			return cli.NewExitError(err.Error(), 1)
 		}
 
 		fmt.Printf("%s updated successfully\n", c.String("test-file"))
+
+		return nil
 	},
 }
