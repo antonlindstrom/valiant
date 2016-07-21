@@ -1,0 +1,15 @@
+language: go
+
+go:
+  - 1.5
+  - 1.6
+  - tip
+
+install:
+  - go get ./...
+  - make install-test-utils
+
+script:
+  - make check
+
+sudo: false
