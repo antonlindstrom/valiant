@@ -14,7 +14,8 @@ type Response struct {
 }
 
 type TestSpec struct {
-	Request        Request  `yaml:"request"`
-	Response       Response `yaml:"response"`
-	TimeoutSeconds int      `yaml:"timeout_seconds"`
+	Request          Request  `yaml:"request"`
+	Response         Response `yaml:"response"`
+	TimeoutSeconds   int      `yaml:"timeout_seconds"`
+	SkipValidateBody bool     `yaml:"skip_validate_body"`
 }

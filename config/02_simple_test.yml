@@ -1,0 +1,9 @@
+request:
+  headers:
+    Host: example.com
+  method: GET
+  path: /
+response:
+  code: 200
+timeout_seconds: 0
+skip_validate_body: true

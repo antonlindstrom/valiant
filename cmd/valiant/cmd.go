@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/codegangsta/cli"
@@ -17,5 +18,9 @@ func main() {
 		cmdGenerate,
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to execute command: %s", err)
+		os.Exit(1)
+	}
 }
