@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/antonlindstrom/valiant/config"
+	"github.com/saltside/valiant/config"
 )
 
 var (

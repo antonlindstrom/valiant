@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 var cmdUpdate = &cli.Command{
