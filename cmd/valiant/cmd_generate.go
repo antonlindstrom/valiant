@@ -7,12 +7,12 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-var cmdGenerate = cli.Command{
+var cmdGenerate = &cli.Command{
 	Name:    "generate",
 	Aliases: []string{"g", "gen"},
 	Usage:   "generate example test file",
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "test-file",
 			Usage: "Full path to the destination, example: tests/00_example.yml (required)",
 		},

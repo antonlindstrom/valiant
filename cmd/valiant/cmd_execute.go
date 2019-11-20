@@ -4,16 +4,16 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-var cmdExecute = cli.Command{
+var cmdExecute = &cli.Command{
 	Name:    "execute",
 	Aliases: []string{"e"},
 	Usage:   "execute tests against address",
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "address",
 			Usage: "HTTP address to upstream server to test (required)",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "test-directory",
 			Value: "tests",
 			Usage: "Path to directory containing tests",

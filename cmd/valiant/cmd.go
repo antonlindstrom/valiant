@@ -12,7 +12,7 @@ func main() {
 	app.Name = "valiant"
 	app.Usage = "Validate request and responses to a web site."
 
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		cmdExecute,
 		cmdUpdate,
 		cmdGenerate,
