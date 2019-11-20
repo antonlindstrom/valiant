@@ -4,19 +4,19 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
-var cmdUpdate = cli.Command{
+var cmdUpdate = &cli.Command{
 	Name:    "update",
 	Aliases: []string{"u"},
 	Usage:   "update test with upstream response",
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "address",
 			Usage: "HTTP address to upstream server to test (required)",
 		},
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "test-file",
 			Usage: "Full path to the test to update, example: tests/00_example.yml (required)",
 		},

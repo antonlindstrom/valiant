@@ -3,16 +3,16 @@ package main
 import (
 	"io/ioutil"
 
-	"github.com/antonlindstrom/valiant/config"
-	"github.com/codegangsta/cli"
+	"github.com/saltside/valiant/config"
+	"github.com/urfave/cli"
 )
 
-var cmdGenerate = cli.Command{
+var cmdGenerate = &cli.Command{
 	Name:    "generate",
 	Aliases: []string{"g", "gen"},
 	Usage:   "generate example test file",
 	Flags: []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "test-file",
 			Usage: "Full path to the destination, example: tests/00_example.yml (required)",
 		},
