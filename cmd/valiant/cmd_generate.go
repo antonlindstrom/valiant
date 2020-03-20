@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/antonlindstrom/valiant/config"
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 var cmdGenerate = cli.Command{
