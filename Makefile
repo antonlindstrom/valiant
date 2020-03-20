@@ -9,15 +9,13 @@ $(PROGRAM): $(GOFILES)
 
 .PHONY: check
 check: $(PROGRAM)
-	go test -cover ./...
+	go test -v -cover ./...
 	go vet ./...
-	errcheck ./...
-	gofmt -s -l -w -d ./cmd/valiant ./config
-	misspell -error ./cmd/valiant ./config
+	golangci-lint run ./...
 
 .PHONY: install
 install: $(PROGRAM)
-	cp $(PROGRAM) $(GOPATH)/bin/$(PROGRAM)
+	install -m 755 $(PROGRAM) $(GOPATH)/bin/$(PROGRAM)
 
 .PHONY: clean
 clean:
@@ -25,5 +23,4 @@ clean:
 
 .PHONY: install-test-utils
 install-test-utils:
-	go get -u github.com/client9/misspell/cmd/misspell
-	go get -u github.com/kisielk/errcheck
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.24.0
